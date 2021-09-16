@@ -31,6 +31,10 @@ class Pessoa {
     public function imprimeCPF() {
         echo $this->cpf . PHP_EOL;
     }
+    
+    public function dizOi() {
+        echo 'Oi!';
+    }
 }
 
 $obj = new Pessoa('Caio'); // instanciando a classe Pessoa (criando um novo objeto do tipo Pessoa)
