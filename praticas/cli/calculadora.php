@@ -1,60 +1,73 @@
 <?php
 // Single Responsability (Responsabilidade Única)
 
-function realizaOperacao($valorUm, $valorDois, $operacao) {
-    /**
-     * Retorna o valor de uma operação matemática,
-     * baseado no valor do parâmetro $operacao. Se
-     * a operação não existir, retorna null.
-     * 1 - Soma
-     * 2 - Subtração
-     * 3 - Multiplicação
-     * 4 - Divisão
-     */
+class Calculadora {
+    private $valorUm, $valorDois, $operacao;
 
-    // global $valorUm, $valorDois;
+    public function __construct() {
+        echo 'Digite o valor 01: ';
+        $this->valorUm = $this->pegaEntradaDoUsuario();
 
-    switch ($operacao) {
-        case 1: 
-            return $valorUm + $valorDois;
+        echo 'Digite o valor 02: ';
+        $this->valorDois = $this->pegaEntradaDoUsuario();
+    }
+
+    private function pegaEntradaDoUsuario() {
+        return rtrim(fgets(STDIN));
+    }
+
+    private function exibeResultado($resultado) {
+        echo is_null($resultado) ? "Opa. Esta não é a operação que você procura" : "O resultado é: {$resultado}";
+    }
+
+    public function capturaOperacao() {
+        echo "
+        Escolha uma das seguintes operações:
+        1 - Soma
+        2 - Subtração
+        3 - Multiplicação
+        4 - Divisão
+        >>> ";
+        $this->operacao = rtrim(fgets(STDIN));
+    }
     
-        case 2:
-            return $valorUm - $valorDois;
-    
-        case 3:
-            return $valorUm * $valorDois;
-    
-        case 4:
-            return $valorUm / $valorDois;
+    public function realizaOperacao() {
+        /**
+         * Retorna o valor de uma operação matemática,
+         * baseado no valor do parâmetro $operacao. Se
+         * a operação não existir, retorna null.
+         * 1 - Soma
+         * 2 - Subtração
+         * 3 - Multiplicação
+         * 4 - Divisão
+         */
         
-        default:
-            return NULL;
+        switch ($this->operacao) {
+            case 1: 
+                $resultado = $this->valorUm + $this->valorDois;
+                break;
+                
+            case 2:
+                $resultado = $this->valorUm - $this->valorDois;
+                break;
+                
+            case 3:
+                $resultado = $this->valorUm * $this->valorDois;
+                break;
+                
+            case 4:
+                $resultado = $this->valorUm / $this->valorDois;
+                break;
+            
+            default:
+                $resultado = NULL;
+        }
+        $this->exibeResultado($resultado);
     }
 }
 
-function pegaEntradaDoUsuario() {
-    return rtrim(fgets(STDIN));
-}
+/* $calculadora = new Calculadora();
 
-// $pegaEntradaDoUsuario = fn() => rtrim(fgets(STDIN));
+$calculadora->capturaOperacao();
 
-
-echo 'Digite o valor 01: ';
-$valorUm = pegaEntradaDoUsuario();
-
-echo 'Digite o valor 02: ';
-$valorDois = pegaEntradaDoUsuario();
-
-echo "Você digitou os valores: {$valorUm} e ${valorDois}" . PHP_EOL;
-echo "
-Escolha uma das seguintes operações:
-1 - Soma
-2 - Subtração
-3 - Multiplicação
-4 - Divisão
->>> ";
-
-$operacao = pegaEntradaDoUsuario();
-$resultado = realizaOperacao($valorUm, $valorDois, $operacao);
-
-echo is_null($resultado) ? "Opa. Esta não é a operação que você procura" : "O resultado é: {$resultado}";
+$calculadora->realizaOperacao(); */
