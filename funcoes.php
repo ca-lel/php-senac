@@ -26,7 +26,6 @@ $multiplica = fn($a, $b) => $a * $b; // divide o escopo com o global
 
 soma(2, '2');
 echo PHP_EOL;
-
 $a = 2;
 $b = 2;
 $resultado = subtrai($a, $b);

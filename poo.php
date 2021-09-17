@@ -12,15 +12,17 @@
  */
 
 class Pessoa {
+    // Superclasse (Classe mãe)
     // Atributos ou Propriedades
     // Visibilidade de atibutos é obrigatória!
     public $nome;
     protected $idade;
-    private $cpf;
+    private $cpf, $rg;
 
-    public function __construct($nome) {
+    public function __construct($n, $c) {
         // É chamado toda vez que a classe é instanciada.
-        $this->nome = $nome;
+        $this->nome = $n;
+        $this->cpf = $c;
         echo 'Um objeto da classe ' . __CLASS__ . ' foi criado!' . PHP_EOL;
         echo 'Olá! Eu sou um objeto, e meu nome é: '. $this->nome . PHP_EOL;
     }
@@ -37,8 +39,16 @@ class Pessoa {
     }
 }
 
-$obj = new Pessoa('Caio'); // instanciando a classe Pessoa (criando um novo objeto do tipo Pessoa)
-// echo "Meu nome é " . $obj->nome . PHP_EOL;
+class Estudante extends Pessoa {
+    // Subclasse (Classe filha)
+    public function __construct($n, $c) {
+        parent::__construct($n, $c);
+    }
+}
 
-$obj2 = new Pessoa('Ian');
-$obj3 = new Pessoa('Davi');
+// $obj = new Pessoa('Caio', '11111111111'); // instanciando a classe Pessoa (criando um novo objeto do tipo Pessoa)
+// $obj2 = new Pessoa('Marcos', '22222222222'); // instanciando a classe Pessoa (criando um novo objeto do tipo Pessoa)
+$objEstudante = new Estudante('Caio', '11111111111');
+echo $objEstudante->imprimeCPF();
+
+// var_dump($objEstudante);
